@@ -47,19 +47,6 @@ Then install all dependencies, in repo's root:
 $ npm install 
 ```
 
-## Mock Server
-
-Before create your first cordova app, please install `http-server` globally so that you can run a mock server with zero configuration.
-
-```
-$ npm install http-server -g
-```
-
-in repo's root:
-
-```
-$ http-server ./mock_api -p 4000 --cors
-```
 
 ## Cordova App Guides
 
@@ -140,11 +127,7 @@ $ npm run build
 
 The result is available in `www/` folder.
 
-## Demo
 
-[https://hi.dearb.me/]
-
-[![App Store](http://dearb.u.qiniudn.com/appstore-button.png)](https://itunes.apple.com/us/app/hi-liao-gao-xiao-shu-dong/id917320045?mt=8)
 
 ## License
 
