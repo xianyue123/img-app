@@ -1,5 +1,11 @@
 <template>
-    <div class="home-view">
+    <f7-page toolbar-fixed navbar-fixed>
+      <f7-navbar theme="white">
+          <f7-nav-left>
+          </f7-nav-left>
+          <f7-nav-center sliding>地 图</f7-nav-center>
+      </f7-navbar>
+      <div class="home-view">
         <el-amap
           vid="amap"  
           :center="center"
@@ -16,7 +22,13 @@
             <div @click="zoomIn()"><span class="f7-icons">add</span></div>
             <div @click="zoomOut()"><span class="f7-icons">delete</span></div>
         </div>
-    </div>
+      </div>
+       <f7-toolbar tabbar labels>
+        <f7-link @click="go_map" icon="iconfont icon-ditu4" text="地图" tab-link="#home" active url></f7-link>
+        <f7-link @click="go_ppv" icon="iconfont icon-daohang" text="实景" tab-link="#contacts"></f7-link>
+        <f7-link @click="go_profile" icon="iconfont icon-geren" text="个人" tab-link="#settings"></f7-link>
+      </f7-toolbar>
+    </f7-page>
 </template>
 
 <style lang="less">
@@ -97,14 +109,9 @@ export default {
     //     this.$f7.hideIndicator()
     //   })
     // })
-
+    
   },
   methods: {
-    routeToPost(data) {
-    },
-    resizeMap(){
-       
-    },
     zoomIn(){
         if(this.zoom < 19){
             this.zoom ++;
@@ -114,7 +121,31 @@ export default {
         if(this.zoom > 3){
             this.zoom --;
         }
-    }
+    },
+    go_map(){
+          f7.mainView.router.load({
+              url: '/map/',
+              force: true,
+              reload: true,
+              ignoreCache: true,
+          });
+      },
+      go_ppv(){
+        f7.mainView.router.load({
+            url: '/ppv/',
+            force: true,
+            reload: true,
+            ignoreCache: true,
+        });
+      },
+      go_profile(){
+        f7.mainView.router.load({
+            url: '/settings/',
+            force: true,
+            reload: true,
+            ignoreCache: true,
+        });
+      }
   },
   components: {
     
@@ -163,5 +194,11 @@ export default {
 	.map_toolbar div span{
 		line-height: 22px;
 		font-size: 20px;
-	}
+  }
+  .amap-logo{
+    display: none;
+  }
+  .amap-copyright{
+    display: none;
+  }
 </style>

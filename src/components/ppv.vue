@@ -1,4 +1,14 @@
 <template>
+  <f7-page>
+      <f7-navbar theme="white">
+          <f7-nav-left>
+          </f7-nav-left>
+          <f7-nav-center sliding>实 景</f7-nav-center>
+          <!-- 头部右侧标题 -->
+          <f7-nav-right>
+            <f7-link open-popup="#projectView" icon-size="24" icon="iconfont icon-daohangliebiao"></f7-link>
+          </f7-nav-right>
+      </f7-navbar>
     <div class="ppv-view">
       <div id="ppv_container" class="ppv_container">
         <div id="ppv">
@@ -11,6 +21,12 @@
         </div>
 	    </div>
     </div>
+    <f7-toolbar tabbar labels>
+        <f7-link @click="go_map" icon="iconfont icon-ditu4" text="地图" tab-link="#home"></f7-link>
+        <f7-link @click="go_ppv" icon="iconfont icon-daohang" text="实景" tab-link="#contacts" active url></f7-link>
+        <f7-link @click="go_profile" icon="iconfont icon-geren" text="个人" tab-link="#settings"></f7-link>
+      </f7-toolbar>
+  </f7-page>
 </template>
 <script>
 import {mapState} from 'vuex'
@@ -80,6 +96,30 @@ export default {
 				// 2 ppvision服务地址
         this.ppv.setServer("http://47.94.22.143:8088/PPVServer.asmx");
         this.ppv.locate(4, 116.400322, 39.948607, '6MaPPMsBGdgxUqCVULFACSyXlnFENs7GaQSnJfin');
+      },
+      go_map(){
+          f7.mainView.router.load({
+              url: '/map/',
+              force: true,
+              reload: true,
+              ignoreCache: true,
+          });
+      },
+      go_ppv(){
+        f7.mainView.router.load({
+            url: '/ppv/',
+            force: true,
+            reload: true,
+            ignoreCache: true,
+        });
+      },
+      go_profile(){
+       f7.mainView.router.load({
+            url: '/settings/',
+            force: true,
+            reload: true,
+            ignoreCache: true,
+        });
       }
   }
 }

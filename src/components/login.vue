@@ -1,29 +1,44 @@
 <template>
-  <f7-page class="login-page">
-    <f7-navbar title="我的账号" sliding></f7-navbar>
-    <f7-block>
-        <div class="logo">
-            <img src="../../static/img/hiapp_logo@2x.png" alt="logo">
-        </div>
-        <div class="app-name">HiApp</div>
-    </f7-block>
-    <f7-block class="detail">
-        <p>GitHub: BelinChung/HiApp</p>
-        <p>Email: BelinChung@gmail.com</p>
-        <p>Twitter: @BelinChung</p>
-    </f7-block>
-    <f7-link @click="goback" text="返回"></f7-link>
-    <f7-block class="copyright">
-        Copyright Ã‚Â© 2017 BelinChung.
-    </f7-block>
-  </f7-page>
+    <f7-page class="login-page">
+        <f7-block>
+            <div class="logo">
+                <img src="../../static/img/hiapp_logo@2x.png" alt="logo">
+            </div>
+            <div class="app-name">HiApp</div>
+        </f7-block>
+        <f7-block class="detail">
+            <f7-list form>
+          <f7-list-item>
+            <f7-label>用户名</f7-label>
+            <f7-input name="username" type="text" placeholder="请输入用户名"></f7-input>
+          </f7-list-item>
+          <f7-list-item>
+            <f7-label>密码</f7-label>
+            <f7-input name="password" type="password" placeholder="请输入密码"></f7-input>
+          </f7-list-item>
+        </f7-list>
+        </f7-block>
+        <f7-block>
+            <f7-button @click="submit" fill big>登 录</f7-button>
+        </f7-block>
+        <f7-block class="copyright">
+            Copyright Ã‚Â© 2017 xianyue.
+        </f7-block>
+    </f7-page>
 </template>
 <script>
     export default {
         methods: {
-            goback() {
-                console.log(f7)
-                f7.mainView.router.back()
+            submit() {
+                f7.alert('登录成功', '提示', () => {
+                   f7.mainView.router.load(
+                    {   
+                        url: '/map/',
+                        force: true,
+                        reload: true,
+                        ignoreCache: true
+                    })
+                })
             }
         }
     }
@@ -31,6 +46,9 @@
 
 
 <style lang="less" scoped>
+    .content-block{
+        margin:45px 0;
+    }
     .login-page {
         .logo{
             width: 90px;
@@ -72,4 +90,8 @@
             padding: 0;
         }
     }
+    .item-title{
+        text-align: right;
+        margin-right: 20px;
+    } 
 </style>

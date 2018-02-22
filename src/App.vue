@@ -5,14 +5,15 @@
     <f7-statusbar></f7-statusbar>
     <!-- Main Views -->
     <f7-views>
-        <home-view></home-view>
+      <f7-view id="main-view" url="/" main>
+      </f7-view>
     </f7-views>
     <project-view></project-view>
   </div>
 </template>
 
 <script>
-import homeView from './components/home.vue'
+import loginView from './components/login'
 import projectView from './components/project.vue'
 
 export default {
@@ -29,7 +30,7 @@ export default {
   },
   components: {
     projectView,
-    homeView
+    loginView
   }
 }
 </script>
