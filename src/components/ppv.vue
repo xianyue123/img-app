@@ -6,9 +6,12 @@
           <f7-nav-center sliding>实 景</f7-nav-center>
           <!-- 头部右侧标题 -->
           <f7-nav-right>
-            <f7-link open-popup="#projectView" icon-size="24" icon="iconfont icon-daohangliebiao"></f7-link>
+            <f7-link open-panel="right" icon-size="24" icon="iconfont icon-daohangliebiao"></f7-link>
           </f7-nav-right>
       </f7-navbar>
+       <div style="top: 55px; left: 8px; z-index: 1988;position: absolute;" class="lds-rolling" v-show="loading">
+          <div></div>
+        </div>
     <div class="ppv-view">
       <div id="ppv_container" class="ppv_container">
         <div id="ppv">
@@ -34,7 +37,9 @@ export default {
   data(){
     return {
 				ppv: null,
-				isPlay: true,
+        isPlay: true,
+        toolId: 0,
+        loading: false,
     }
   },
   computed: {
@@ -49,11 +54,13 @@ export default {
 				if(this.isPlay){
 					console.log('play');
 					this.ppv.play();
-					this.isPlay = false;
+          this.isPlay = false;
+          this.toolId = 31;
 				}else{
 					console.log('stop');
 					this.ppv.stop();
-					this.isPlay = true;
+          this.isPlay = true;
+          this.toolId = 0;
 				}
 			},
 			forwardUp(){
@@ -68,8 +75,8 @@ export default {
             //bgcolor:0x000000,//'rgb(255,255,255)',
             bgcolor:'rgb(83, 89, 93, 0.9)',
             fullView: 4,//照片是否填满div，不管是否会被裁剪
-            enableArrow:false,
-            enableHistory:false,
+            enableArrow: true,
+            enableHistory: true,
 				    enableSurfaceDetection:false,     //禁止探面前进
 				    enableDeviceOrientation:false,    //启用陀螺仪
             scope:50,//可视范围
@@ -93,9 +100,27 @@ export default {
                 lean:18,//前倾
             }
 				});
-				// 2 ppvision服务地址
+			
+        let _self = this;
+        this.ppv.onTool = function(e){
+            _self.toolId = e.tool;
+        }
+
+        this.ppv.onLoadFrame = (e) => {
+            console.log(e);
+        }
+
+        this.ppv.onBusy = (e) => {
+            if(_self.toolId == 31) return;
+            _self.loading = true;
+        }
+
+        this.ppv.onIdle = (e) => {
+            if(_self.toolId == 31) return;
+            _self.loading = false;
+        }
         this.ppv.setServer("http://47.94.22.143:8088/PPVServer.asmx");
-        this.ppv.locate(4, 116.400322, 39.948607, '6MaPPMsBGdgxUqCVULFACSyXlnFENs7GaQSnJfin');
+        this.ppv.locate(3, 116.660394, 39.741341, '6MaPPMsBGdgxUqCVULFACSyXlnFENs7GaQSnJfin');
       },
       go_map(){
           f7.mainView.router.load({
@@ -169,7 +194,7 @@ export default {
 		height: 22px;
 		margin-top: 10px;
 		padding: 8px;
-		box-shadow:0px 2px 2px #888888;
+		box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
 		text-align: center;
 		cursor: pointer;
 		color: rgb(70, 70, 70);
@@ -275,3 +300,61 @@ export default {
       margin: 5px;
     }
 </style>
+
+
+<style type="text/css" scoped>
+    @keyframes lds-rolling {
+      0% {
+        -webkit-transform: translate(-50%, -50%) rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      100% {
+        -webkit-transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    @-webkit-keyframes lds-rolling {
+      0% {
+        -webkit-transform: translate(-50%, -50%) rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      100% {
+        -webkit-transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .lds-rolling {
+      position: relative;
+    }
+
+    .lds-rolling div,
+    .lds-rolling div:after {
+      position: absolute;
+      width: 96px;
+      height: 96px;
+      border: 16px solid #646676;
+      border-top-color: transparent;
+      border-radius: 50%;
+    }
+
+    .lds-rolling div {
+      -webkit-animation: lds-rolling 1s linear infinite;
+      animation: lds-rolling 1s linear infinite;
+      top: 100px;
+      left: 100px;
+    }
+
+    .lds-rolling div:after {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    .lds-rolling {
+      width: 30px !important;
+      height: 30px !important;
+      -webkit-transform: translate(-15px, -15px) scale(0.15) translate(15px, 15px);
+      transform: translate(-15px, -15px) scale(0.15) translate(15px, 15px);
+    }
+  </style>

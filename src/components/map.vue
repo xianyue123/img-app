@@ -4,6 +4,10 @@
           <f7-nav-left>
           </f7-nav-left>
           <f7-nav-center sliding>地 图</f7-nav-center>
+          <!-- 头部右侧标题 -->
+          <f7-nav-right>
+            <f7-link open-panel="right" icon-size="24" icon="iconfont icon-daohangliebiao"></f7-link>
+          </f7-nav-right>
       </f7-navbar>
       <div class="home-view">
         <el-amap
@@ -185,7 +189,7 @@ export default {
 		height: 22px;
 		margin-top: 10px;
 		padding: 8px;
-		box-shadow:0px 2px 2px #888888;
+		box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
 		text-align: center;
 		cursor: pointer;
 		color: rgb(70, 70, 70);

@@ -21,6 +21,11 @@
       function() 
       { 
         navigator.splashscreen.hide(); 
+        document.addEventListener("backbutton", function(){
+          if(confirm('您确定要退出应用吗？','提示信息')){
+            navigator.app.exitApp();  
+          }
+        }, false);      
       }, 
       false); 
   </script>

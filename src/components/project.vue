@@ -1,41 +1,43 @@
 <template>
-  <f7-popup id="projectView">
-    <f7-page navbar-fixed>
-      <f7-navbar theme="white">
-        <f7-nav-center title="工程列表"></f7-nav-center>
-        <f7-nav-right>
-          <f7-link close-popup><i class="f7-icons margin-right-10">close</i></f7-link>
-        </f7-nav-right>
-      </f7-navbar>
-        <f7-list>
-            <f7-list-group>
-                <f7-list-item title="camera-20170716-135351" group-title></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 1"></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 2"></f7-list-item>
-            </f7-list-group>
-            <f7-list-group>
-                <f7-list-item title="a60068-2017-10-18001" group-title></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 1"></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 2"></f7-list-item>
-            </f7-list-group>
-            <f7-list-group>
-                <f7-list-item title="a60068-2017-10-18001" group-title></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 1"></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 2"></f7-list-item>
-            </f7-list-group>
-            <f7-list-group>
-                <f7-list-item title="a60068-2017-10-18001" group-title></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 1"></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 2"></f7-list-item>
-            </f7-list-group>
-            <f7-list-group>
-                <f7-list-item title="a60068-2017-10-18001" group-title></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 1"></f7-list-item>
-                <f7-list-item media-item @click="show" link="#" title="Item 2"></f7-list-item>
-            </f7-list-group>
-        </f7-list>
-    </f7-page>
-  </f7-popup>
+    <!-- Left Panel -->
+    <f7-panel right cover layout="white">
+        <f7-page toolbar-fixed navbar-fixed>
+             <f7-navbar >
+                <f7-nav-center sliding>线路列表</f7-nav-center>
+            </f7-navbar>
+            <f7-block>
+                <f7-block-title>工程1</f7-block-title>
+                <f7-list>
+                    <f7-list-item checkbox name="my-checkbox" value="1" title="a60068-2017-10-18001" checked></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="2" title="a60068-2017-10-18001"></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="3" title="a60068-2017-10-18001"></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="4" title="a60068-2017-10-18001"></f7-list-item>
+                </f7-list>
+                <f7-block-title>工程2</f7-block-title>
+                <f7-list>
+                    <f7-list-item checkbox name="my-checkbox" value="1" title="a60068-2017-10-18001" checked></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="2" title="a60068-2017-10-18001"></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="3" title="a60068-2017-10-18001"></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="4" title="a60068-2017-10-18001"></f7-list-item>
+                </f7-list>
+                <f7-block-title>工程3</f7-block-title>
+                <f7-list>
+                    <f7-list-item checkbox name="my-checkbox" value="1" title="a60068-2017-10-18001" checked></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="2" title="a60068-2017-10-18001"></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="3" title="a60068-2017-10-18001"></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="4" title="a60068-2017-10-18001"></f7-list-item>
+                </f7-list>
+                <f7-block-title>工程4</f7-block-title>
+                <f7-list>
+                    <f7-list-item checkbox name="my-checkbox" value="1" title="a60068-2017-10-18001" checked></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="2" title="a60068-2017-10-18001"></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="3" title="a60068-2017-10-18001"></f7-list-item>
+                    <f7-list-item checkbox name="my-checkbox" value="4" title="a60068-2017-10-18001"></f7-list-item>
+                </f7-list>
+            </f7-block>
+        </f7-page>
+    </f7-panel>
+
 </template>
 
 <script>
@@ -76,8 +78,21 @@
 
 </script>
 <style scoped>
+    .list-block ul li{
+        margin-top: 2px;
+    }
     .list-block{
         margin: 0px;
+    }
+    .content-block-title{
+        font-weight: 600;
+        margin: 15px 15px 5px;
+    }
+    .navbar{
+        background: rgb(64, 158, 255)
+    }
+    .list-block .item-media{
+        padding-top: 11px;
     }
 </style>
 

@@ -14,11 +14,10 @@ import 'framework7/dist/css/framework7.ios.min.css'
 import 'framework7/dist/css/framework7.ios.colors.min.css'
 import 'framework7-icons/css/framework7-icons.css'
 
+//OR for Material Theme:
+// import 'framework7/dist/css/framework7.material.min.css'
+// import 'framework7/dist/css/framework7.material.colors.min.css'
 
-/* OR for Material Theme:
-import Framework7Theme from 'framework7/dist/css/framework7.material.min.css'
-import Framework7ThemeColors from 'framework7/dist/css/framework7.material.colors.min.css'
-*/
 
 // Import App Custom Styles
 import './assets/icon-font/iconfont.css'
@@ -33,7 +32,6 @@ import App from './App'
 // Import Vuex store
 import store from './store'
 
-
 // Init Vue Plugin
 Vue.use(Framework7Vue)
 
@@ -45,41 +43,34 @@ axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.withCredentials = false
 
 // Add a request interceptor
-axios.interceptors.request.use(config => {
-  console.log(`token ${store.state.token}`)
-  config.headers.Authorization = store.state.token
-  return config
-}, error => {
-  return Promise.reject(error)
-})
+axios.interceptors.request.use(
+  config => {
+    console.log(`token ${store.state.token}`)
+    config.headers.Authorization = store.state.token
+
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
 
 // Add a response interceptor
-axios.interceptors.response.use(response => {
-  let data = response.data
-  return !data.err_code ? data : Promise.reject(data)
-}, error => {
-  return Promise.reject(error)
-})
+axios.interceptors.response.use(
+  response => {
+    let data = response.data
+    return !data.err_code ? data : Promise.reject(data)
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
 
 //Vue.prototype.$http = axios
 
+// import StoreCache from './utils/storeCache'
 
-import StoreCache from './utils/storeCache'
-
-let cache = new StoreCache('vuex')
-
-
-Vue.prototype.goBack = function() {
-  console.log(f7.mainView.history);
-  console.log(f7.mainView.history.length);
-  console.log(f7.mainView.history[f7.mainView.history.length - 2])
-  f7.mainView.router.back({
-    url: f7.mainView.history[f7.mainView.history.length - 2],
-    force: true,
-    ignoreCache: true,
-    reload: true,
-  })
-}
+// let cache = new StoreCache('vuex')
 
 // Init App
 new Vue({
@@ -100,15 +91,15 @@ new Vue({
     preroute: function(view, options) {
       //console.log(f7.mainView.history);
       //console.log(options);
-        // view.router.load({
-        //   url: '/login/',
-        //   force: true,
-        //   reload: true,
-        //   ignoreCache: true,
-        // })
-        // return false;
-        return true;
-    },
+      // view.router.load({
+      //   url: '/login/',
+      //   force: true,
+      //   reload: true,
+      //   ignoreCache: true,
+      // })
+      // return false;
+      return true
+    }
   },
   // Register App Component
   components: {
